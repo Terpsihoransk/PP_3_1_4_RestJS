@@ -26,4 +26,5 @@ public class UserControllerRest {
     public ResponseEntity<User> user(Principal principal) {
         return new ResponseEntity<>(userServiceImpl.findByUsername(principal.getName()), HttpStatus.OK);
     }
+
 }

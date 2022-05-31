@@ -1,17 +1,17 @@
-fetch("http://localhost:8080/rests/user")     //nav
+fetch("http://localhost:8080/api/user")
     .then(res => { res.json().then(
         user=>{
-                let navbarDark = ""
-                navbarDark += "<b class=\"text-white\" style=\"font-size: 18px\">"+user.username+"</b>"
-                navbarDark += "<span class=\"text-white\"  style=\"font-size: 18px\"> &nbsp with roles: &nbsp </span>"
-                navbarDark += "<span class=\"text-white\"  style=\"font-size: 18px\">"
-                user.roles.forEach((role) => navbarDark += role.name.replace('ROLE_','')+' ')
-                navbarDark += "</span>"
-                document.getElementById("navbarDark").innerHTML = navbarDark
+            let navbarDark = ""
+            navbarDark += "<b class=\"text-white\" style=\"font-size: 18px\">"+user.username+"</b>"
+            navbarDark += "<span class=\"text-white\"  style=\"font-size: 18px\"> &nbsp with roles: &nbsp </span>"
+            navbarDark += "<span class=\"text-white\"  style=\"font-size: 18px\">"
+            user.roles.forEach((role) => navbarDark += role.role.replace('ROLE_','')+' ')
+            navbarDark += "</span>"
+            document.getElementById("navbarDark").innerHTML = navbarDark
         }
     )})
 
-fetch('http://localhost:8080/rests')
+fetch('http://localhost:8080/api')
     .then(response => response.json())
     .then(data => showTable(data))
 
@@ -23,11 +23,10 @@ const showTable = (users) => {   //admin
                     <td>${user.id}</td>
                     <td>${user.username}</td>
                     <td>${user.surname}</td>
-                    <td>${user.email}</td>
                     <td>${user.age}</td>
                     <td>`
 
-        user.roles.forEach((role) => table += role.name.replace('ROLE_', '') + " ")
+        user.roles.forEach((role) => table += role.role.replace('ROLE_', '') + " ")
         table += `
                     </td>
                     <td><button class="btn btn-info eBtn" data-toggle="modal">Edit</button></td>
@@ -46,20 +45,20 @@ const on = (element, event, selector, handler) => {
 }
 
 
-on(document, 'click', '.eBtn', e => {  //edit
+// модалка Edit
+
+on(document, 'click', '.eBtn', e => {
 
     const line = e.target.parentNode.parentNode
     const idMod = line.children[0].innerHTML
     const nameMod = line.children[1].innerHTML
     const surnameMod = line.children[2].innerHTML
-    const emailMod = line.children[3].innerHTML
-    const ageMod = line.children[4].innerHTML
+    const ageMod = line.children[3].innerHTML
 
 
     Id.value = idMod
     Name.value = nameMod
     Surname.value = surnameMod
-    emailEdit.value = emailMod
     ageEdit.value = ageMod
     $('#editModal').modal()
 })
@@ -78,15 +77,13 @@ editModal.addEventListener('submit', (e) => {
     }
     let editUser = {
         id: Id.value,
-        name: Name.value,
+        username: Name.value,
         surname: Surname.value,
-        email: emailEdit.value,
         age: ageEdit.value,
-        password: passEdit.value,
         roles: rolesListEdit
 
     }
-    fetch('http://localhost:8080/rests', {
+    fetch('http://localhost:8080/api', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -105,16 +102,19 @@ editModal.addEventListener('submit', (e) => {
 })
 
 
-on(document, 'click', '.dBtn', e => {  //delete
+
+// модалка Delete
+
+on(document, 'click', '.dBtn', e => {
 
     const line = e.target.parentNode.parentNode
     const idDelMod = line.children[0].innerHTML
-    const nameDelMod = line.children[1].innerHTML
+    const usernameDelMod = line.children[1].innerHTML
     const surNameDelMod = line.children[2].innerHTML
     const emailDelMod = line.children[3].innerHTML
 
     idDel.value = idDelMod
-    nameDel.value = nameDelMod
+    usernameDel.value = usernameDelMod
     surnameDel.value = surNameDelMod
     emailDel.value = emailDelMod
 
@@ -123,7 +123,7 @@ on(document, 'click', '.dBtn', e => {  //delete
 
 deleteModal.addEventListener('submit', (e) => {
     e.preventDefault()
-    fetch('http://localhost:8080/rests/' + idDel.value, {
+    fetch('http://localhost:8080/api/' + idDel.value, {
         method: 'DELETE'
     })
         // .then(() => document.getElementById(idDelete.value).remove())
@@ -131,7 +131,10 @@ deleteModal.addEventListener('submit', (e) => {
         .then(() => document.getElementById('deleteModalClose').click())
 })
 
-newUserForm.addEventListener('submit', (e) => {   //newu
+
+// панель добавления юзера
+
+newUserForm.addEventListener('submit', (e) => {
     e.preventDefault()
     let id = 0
     let rolesList = [];
@@ -144,16 +147,14 @@ newUserForm.addEventListener('submit', (e) => {   //newu
         rolesList[i] = {id: id, role: $('#roles').val()[i]};
     }
     let newUser = {
-        name: nameNew.value,
+        username: usernameNew.value,
         surname: surnameNew.value,
-        email: emailNew.value,
+        age: ageNew.value,
         password: passNew.value,
         roles: rolesList
-
-
     }
 
-    fetch('http://localhost:8080/rests', {
+    fetch('http://localhost:8080/api', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -168,3 +169,6 @@ newUserForm.addEventListener('submit', (e) => {   //newu
         })
         .then(() => document.getElementById('userTable').click())
 })
+
+
+

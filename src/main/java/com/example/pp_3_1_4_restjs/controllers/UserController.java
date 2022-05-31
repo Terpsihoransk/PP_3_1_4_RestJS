@@ -20,6 +20,7 @@ public class UserController {
         this.userServiceImpl = userServiceImpl;
     }
 
+
     @GetMapping
     public String getUser(Principal principal, Model model) {
         model.addAttribute("user", userServiceImpl.findByUsername(userServiceImpl.getCurrentUsername()));

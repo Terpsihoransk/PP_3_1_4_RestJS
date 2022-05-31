@@ -24,8 +24,8 @@
     </nav>
 
 </head>
-
 <body>
+
 <div class="container-fluid bg-light">
     <div class="row">
         <!--            Левая колонка-->
@@ -47,31 +47,29 @@
             <h2>Admin panel</h2>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#user_table">Users table</a>
+                    <a class="nav-link active" data-toggle="tab" href="#allUsers">Users table</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#createUser">New User</a>
+                    <a class="nav-link" data-toggle="tab" href="#addNewUser">New User</a>
                 </li>
             </ul>
 
             <div class="tab-content">
-                <div class="tab-pane container-fluid active" id="allUsers">
-                    <div class="row">
-                        <div class="col border bg-light">
-                            <p><h6>All users</h6>
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col border bg-white">
-                            <br/>
-                            <table class="table table-hover">
+
+                <div class="tab-pane fade show active" id="allUsers">
+                    <div class="card">
+                        <div class="bg-light p-2 pl-4 font-weight-bold"><h5>All users</h5></div>
+                        <div class="card-block p-3">
+                            <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Username</th>
-                                    <th>Surname</th>
-                                    <th>Email</th>
-                                    <th>Age</th>
-                                    <th>Role</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Username</th>
+                                    <th scope="col">Surname</th>
+                                    <th scope="col">Age</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Delete</th>
                                 </tr>
                                 </thead>
                                 <tbody id="tableAllUsers"></tbody>
@@ -80,7 +78,7 @@
                     </div>
                 </div>
 
-<!--                Панель добавления юзера-->
+                <!--                Панель добавления юзера-->
                 <div class="tab-pane fade" id="addNewUser">
                     <div class="card">
                         <div class="card-block">
@@ -89,9 +87,9 @@
                                 <div class="text-center  font-weight-bold"
                                      style="margin-left:400px; margin-right:400px; margin-bottom:20px;">
                                     <div class="form-group">
-                                        <label for="nameNew" class="col-form-label">Name</label>
-                                        <input type="text" class="form-control feildtext" id="nameNew" name="name"
-                                               placeholder="Name">
+                                        <label for="usernameNew" class="col-form-label">Username</label>
+                                        <input type="text" class="form-control feildtext" id="usernameNew" name="username"
+                                               placeholder="Username">
                                     </div>
                                     <div class="form-group">
                                         <label for="surnameNew" class="col-form-label">Surname</label>
@@ -99,9 +97,9 @@
                                                placeholder="Surname">
                                     </div>
                                     <div class="form-group">
-                                        <label for="emailNew" class="col-form-label">Email</label>
-                                        <input type="text" class="form-control feildtext" id="emailNew" name="email"
-                                               placeholder="Email">
+                                        <label for="ageNew" class="col-form-label">Age</label>
+                                        <input type="text" class="form-control feildtext" id="ageNew" name="age"
+                                               placeholder="Age">
                                     </div>
                                     <div class="form-group">
                                         <label for="passNew" class="col-form-label">Password</label>
@@ -121,11 +119,14 @@
                         </div>
                     </div>
                 </div>
-<!--                конец панели добавления-->
             </div>
         </div>
     </div>
 </div>
+</div>
+
+
+
 
 <!--    Модалка edit-->
 <div class="modal fade editModal" id="editModal" tabindex="-1" role="dialog"
@@ -153,16 +154,8 @@
                         <input type="text" class="form-control" id="Surname" name="surname">
                     </div>
                     <div class="form-group">
-                        <label for="emailEdit" class="col-form-label">Email</label>
-                        <input type="text" class="form-control" id="emailEdit" name="email">
-                    </div>
-                    <div class="form-group">
                         <label for="ageEdit" class="col-form-label">Age</label>
                         <input type="text" class="form-control" id="ageEdit" name="age">
-                    </div>
-                    <div class="form-group">
-                        <label for="passEdit" class="col-form-label">Password</label>
-                        <input type="password" class="form-control" id="passEdit" name="pass">
                     </div>
                     <div class="form-group">
                         <label for="rolesEdit" class="col-form-label">Roles</label>
@@ -199,15 +192,15 @@
                         <input type="text" class="form-control" id="idDel" readonly="readonly">
                     </div>
                     <div class="form-group">
-                        <label for="nameDel" class="col-form-label">Name</label>
-                        <input type="text" class="form-control" id="nameDel" readonly="readonly">
+                        <label for="usernameDel" class="col-form-label">Username</label>
+                        <input type="text" class="form-control" id="usernameDel" readonly="readonly">
                     </div>
                     <div class="form-group">
                         <label for="surnameDel" class="col-form-label">Surname</label>
                         <input type="text" class="form-control" id="surnameDel"  readonly="readonly">
                     </div>
                     <div class="form-group">
-                        <label for="emailDel" class="col-form-label">Email</label>
+                        <label for="emailDel" class="col-form-label">Age</label>
                         <input type="text" class="form-control" id="emailDel" readonly="readonly">
                     </div>
                     <div class="form-group">

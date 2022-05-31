@@ -8,23 +8,18 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "role")
+@Table(name = "roles")
 @NoArgsConstructor
 public class Role implements GrantedAuthority {
-
-    public Role(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String name;
+    private String role;
 
     @Override
     public String getAuthority() {
-        return name;
+        return role;
     }
 }

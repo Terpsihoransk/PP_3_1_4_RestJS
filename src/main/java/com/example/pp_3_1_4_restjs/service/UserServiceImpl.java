@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     // из пачки ролей делаем пачку authority
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
+        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getRole())).collect(Collectors.toList());
     }
 
     public User findByUsername(String username) {
@@ -90,4 +90,5 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     public User getUserById (int id) {
         return userRepository.findById(id).orElse(null);
     }
+
 }

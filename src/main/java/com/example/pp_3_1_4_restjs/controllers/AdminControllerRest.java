@@ -1,6 +1,8 @@
 package com.example.pp_3_1_4_restjs.controllers;
 
 import com.example.pp_3_1_4_restjs.models.User;
+import com.example.pp_3_1_4_restjs.service.RoleServiceImpl;
+import com.example.pp_3_1_4_restjs.service.UserService;
 import com.example.pp_3_1_4_restjs.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,14 +13,16 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rests")
+@RequestMapping("/api")
 public class AdminControllerRest {
 
     private UserServiceImpl userServiceImpl;
+    private RoleServiceImpl roleServiceImpl;
 
     @Autowired
-    public AdminControllerRest(UserServiceImpl userServiceImpl) {
+    public AdminControllerRest(UserServiceImpl userServiceImpl, RoleServiceImpl roleServiceImpl) {
         this.userServiceImpl = userServiceImpl;
+        this.roleServiceImpl = roleServiceImpl;
     }
 
     @GetMapping()
@@ -48,4 +52,6 @@ public class AdminControllerRest {
         userServiceImpl.addUser(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
+
+
 }
