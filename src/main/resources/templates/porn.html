@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS (Cloudflare CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/css/bootstrap.min.css" integrity="sha512-T584yQ/tdRR5QwOpfvDfVQUidzfgc2339Lc8uBDtcp/wYu80d7jwBgAxbyMh0a9YM9F8N3tdErpFI8iaGx6x5g==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!-- jQuery (Cloudflare CDN) -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Bootstrap Bundle JS (Cloudflare CDN) -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/js/bootstrap.min.js" integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <title>Porn Page</title>
+
+    <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDark" aria-controls="navbarDark" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse show" id="navbarDark">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page">Привет, </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"><td th:text="${user.username}"></td></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page">тебе уже </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"><td th:text="${user.age}"></td></a>
+                </li>
+            </ul>
+                <ul class="navbar-nav my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link mr-sm-2" href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</head>
+<body>
+
+<div class="container-fluid bg-light">
+    <div class="row">
+        <!--            Левая колонка-->
+        <div class="col-sm-2">
+            <br>
+            <ul class="nav nav-pills nav-fill flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/admin">Admin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user">User</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/porn">18+</a>
+                </li>
+            </ul>
+        </div>
+
+        <!--Правая колонка-->
+        <div class="col-sm-10 bg-light">
+           <div class="card" style="width: 18rem;">
+                <img src="https://cdn-front.kwork.ru/pics/t3/42/17546531-1636356242.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Серьёзно? )))</h5>
+                    <p class="card-text">Это не я, меня заставили так сделать!</p>
+                    <a href="https://platform.kata.academy/" class="btn btn-primary">Go to pornhub</a>
+                </div>
+            </div>
+
+        </div>
+
+
+</body>
+</html>

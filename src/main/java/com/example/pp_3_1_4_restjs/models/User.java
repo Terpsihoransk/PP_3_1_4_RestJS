@@ -17,7 +17,7 @@ public class User implements UserDetails {
     private Integer id;
     private String username;
     private String surname;
-    private String age;
+    private Integer age;
     private String password;
 
     @ManyToMany
