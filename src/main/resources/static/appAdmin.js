@@ -1,4 +1,4 @@
-fetch("http://localhost:8080/api/admin")
+fetch("http://localhost:8080/api")
     .then(res => { res.json().then(
         user=>{
             let navbarDark = ""
@@ -11,7 +11,7 @@ fetch("http://localhost:8080/api/admin")
         }
     )})
 
-fetch('http://localhost:8080/api')
+fetch('http://localhost:8080/api/admin')
     .then(response => response.json())
     .then(data => showTable(data))
 

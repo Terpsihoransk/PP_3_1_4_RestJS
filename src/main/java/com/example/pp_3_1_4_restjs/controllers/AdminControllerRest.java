@@ -23,12 +23,12 @@ public class AdminControllerRest {
         this.userServiceImpl = userServiceImpl;
     }
 
-    @GetMapping()
+    @GetMapping("/admin")
     public ResponseEntity<List<User>> allUsersRest() {
         return new ResponseEntity<>(userServiceImpl.listUser(), HttpStatus.OK);
     }
 
-    @GetMapping("/admin")
+    @GetMapping
     public ResponseEntity<User> navBar() {
         return new ResponseEntity<>(userServiceImpl.findByUsername(userServiceImpl.getCurrentUsername()), HttpStatus.OK);
     }
