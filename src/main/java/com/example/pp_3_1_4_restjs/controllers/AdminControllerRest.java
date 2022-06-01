@@ -49,6 +49,7 @@ public class AdminControllerRest {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
+
     @DeleteMapping("admin/{id}")
     public ResponseEntity<Integer> delete(@PathVariable("id") int id) {
         userServiceImpl.removeUser(id);
