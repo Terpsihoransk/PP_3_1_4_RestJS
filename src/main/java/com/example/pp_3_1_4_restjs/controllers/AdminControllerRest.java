@@ -1,5 +1,6 @@
 package com.example.pp_3_1_4_restjs.controllers;
 
+import com.example.pp_3_1_4_restjs.models.Role;
 import com.example.pp_3_1_4_restjs.models.User;
 import com.example.pp_3_1_4_restjs.service.RoleServiceImpl;
 import com.example.pp_3_1_4_restjs.service.UserService;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,10 +19,12 @@ import java.util.List;
 public class AdminControllerRest {
 
     private final UserServiceImpl userServiceImpl;
+    private final RoleServiceImpl roleServiceImpl;
 
     @Autowired
-    public AdminControllerRest(UserServiceImpl userServiceImpl) {
+    public AdminControllerRest(UserServiceImpl userServiceImpl, RoleServiceImpl roleServiceImpl) {
         this.userServiceImpl = userServiceImpl;
+        this.roleServiceImpl = roleServiceImpl;
     }
 
     @GetMapping("/admin")
@@ -33,9 +37,15 @@ public class AdminControllerRest {
         return new ResponseEntity<>(userServiceImpl.findByUsername(userServiceImpl.getCurrentUsername()), HttpStatus.OK);
     }
 
-    @PutMapping("/admin")
-    public ResponseEntity<User> update(@RequestBody User user) {
-        userServiceImpl.updateUser(user);
+    @PutMapping("/admin/{id}")
+    public ResponseEntity<User> update(@PathVariable("id") int id, @RequestBody User user) {
+        String oldPass = userServiceImpl.getUserById(id).getPassword();
+        if (oldPass.equals(user.getPassword())) {
+            user.setPassword(oldPass);
+            userServiceImpl.updateUser(user);
+        } else {
+            userServiceImpl.addUser(user);
+        }
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 

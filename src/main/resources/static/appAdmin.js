@@ -24,6 +24,7 @@ const showTable = (users) => {   //admin
                     <td>${user.username}</td>
                     <td>${user.surname}</td>
                     <td>${user.age}</td>
+                    <td>${user.password}</td>
                     <td>`
 
         user.roles.forEach((role) => table += role.role.replace('ROLE_', '') + " ")
@@ -54,12 +55,14 @@ on(document, 'click', '.eBtn', e => {
     const nameMod = line.children[1].innerHTML
     const surnameMod = line.children[2].innerHTML
     const ageMod = line.children[3].innerHTML
+    const passMod = line.children[4].innerHTML
 
 
     Id.value = idMod
     Name.value = nameMod
     Surname.value = surnameMod
     ageEdit.value = ageMod
+    passEdit.value = passMod
     $('#editModal').modal()
 })
 
@@ -80,10 +83,11 @@ editModal.addEventListener('submit', (e) => {
         username: Name.value,
         surname: Surname.value,
         age: ageEdit.value,
+        password: passEdit.value,
         roles: rolesListEdit
 
     }
-    fetch('http://localhost:8080/api/admin', {
+    fetch('http://localhost:8080/api/admin/' + Id.value, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
