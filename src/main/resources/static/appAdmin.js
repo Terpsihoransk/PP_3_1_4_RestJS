@@ -1,4 +1,4 @@
-fetch("http://localhost:8080/api/user")
+fetch("http://localhost:8080/api/admin")
     .then(res => { res.json().then(
         user=>{
             let navbarDark = ""
@@ -83,7 +83,7 @@ editModal.addEventListener('submit', (e) => {
         roles: rolesListEdit
 
     }
-    fetch('http://localhost:8080/api', {
+    fetch('http://localhost:8080/api/admin', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -123,7 +123,7 @@ on(document, 'click', '.dBtn', e => {
 
 deleteModal.addEventListener('submit', (e) => {
     e.preventDefault()
-    fetch('http://localhost:8080/api/' + idDel.value, {
+    fetch('http://localhost:8080/api/admin/' + idDel.value, {
         method: 'DELETE'
     })
         // .then(() => document.getElementById(idDelete.value).remove())
@@ -154,7 +154,7 @@ newUserForm.addEventListener('submit', (e) => {
         roles: rolesList
     }
 
-    fetch('http://localhost:8080/api', {
+    fetch('http://localhost:8080/api/admin', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

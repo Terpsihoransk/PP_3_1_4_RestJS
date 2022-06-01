@@ -1,4 +1,4 @@
-fetch('http://localhost:8080/rest')   //user
+fetch('http://localhost:8080/api/user')   //user
     .then(res => { res.json().then(
         user=>{
             let navbarDark = ""

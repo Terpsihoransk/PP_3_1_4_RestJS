@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("/rest")
+@RequestMapping("/api/user")
 public class UserControllerRest {
 
-    private UserServiceImpl userServiceImpl;
+    private final UserServiceImpl userServiceImpl;
 
     @Autowired
     public UserControllerRest(UserServiceImpl userServiceImpl) {
@@ -23,8 +23,8 @@ public class UserControllerRest {
     }
 
     @GetMapping()
-    public ResponseEntity<User> user(Principal principal) {
-        return new ResponseEntity<>(userServiceImpl.findByUsername(principal.getName()), HttpStatus.OK);
+    public ResponseEntity<User> user() {
+        return new ResponseEntity<>(userServiceImpl.findByUsername(userServiceImpl.getCurrentUsername()), HttpStatus.OK);
     }
 
 }

@@ -22,9 +22,9 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserDetailsService, UserService {
 
-    private UserRepository userRepository;
-    private RoleServiceImpl roleService;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserRepository userRepository;
+    private final RoleServiceImpl roleService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public UserServiceImpl(UserRepository userRepository, RoleServiceImpl roleService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
@@ -32,15 +32,12 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
+    // пробовала "ещё проще", но падает авторизация
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = findByUsername(username);
-        if(user == null) {
-            throw new UsernameNotFoundException(String.format("User '%s' not found", username));
-        }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-                mapRolesToAuthorities(user.getRoles()));
+        return new org.springframework.security.core.userdetails.User(findByUsername(username).getUsername(), findByUsername(username).getPassword(),
+                mapRolesToAuthorities(findByUsername(username).getRoles()));
     }
 
     // из пачки ролей делаем пачку authority

@@ -16,13 +16,11 @@ import java.util.List;
 @RequestMapping("/api")
 public class AdminControllerRest {
 
-    private UserServiceImpl userServiceImpl;
-    private RoleServiceImpl roleServiceImpl;
+    private final UserServiceImpl userServiceImpl;
 
     @Autowired
-    public AdminControllerRest(UserServiceImpl userServiceImpl, RoleServiceImpl roleServiceImpl) {
+    public AdminControllerRest(UserServiceImpl userServiceImpl) {
         this.userServiceImpl = userServiceImpl;
-        this.roleServiceImpl = roleServiceImpl;
     }
 
     @GetMapping()
@@ -30,24 +28,24 @@ public class AdminControllerRest {
         return new ResponseEntity<>(userServiceImpl.listUser(), HttpStatus.OK);
     }
 
-    @GetMapping("/user")
-    public ResponseEntity<User> navBar(Principal principal) {
-        return new ResponseEntity<>(userServiceImpl.findByUsername(principal.getName()), HttpStatus.OK);
+    @GetMapping("/admin")
+    public ResponseEntity<User> navBar() {
+        return new ResponseEntity<>(userServiceImpl.findByUsername(userServiceImpl.getCurrentUsername()), HttpStatus.OK);
     }
 
-    @PutMapping()
+    @PutMapping("/admin")
     public ResponseEntity<User> update(@RequestBody User user) {
         userServiceImpl.updateUser(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("admin/{id}")
     public ResponseEntity<Integer> delete(@PathVariable("id") int id) {
         userServiceImpl.removeUser(id);
         return new ResponseEntity<>(id, HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping()
+    @PostMapping("/admin")
     public ResponseEntity<User> addUser(@RequestBody User user) {
         userServiceImpl.addUser(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
