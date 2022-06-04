@@ -1,5 +1,7 @@
 package com.example.pp_3_1_4_restjs.configs;
 
+
+import com.example.pp_3_1_4_restjs.filter.CustomFilter;
 import com.example.pp_3_1_4_restjs.service.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,6 +40,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .csrf().disable(); // сууук, из-за этого всё и не работало....
+
+        http
+                .addFilterAfter(new CustomFilter(), BasicAuthenticationFilter.class);
     }
 
     @Bean
