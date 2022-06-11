@@ -56,6 +56,7 @@ on(document, 'click', '.eBtn', e => {
     const surnameMod = line.children[2].innerHTML
     const ageMod = line.children[3].innerHTML
     const passMod = line.children[4].innerHTML
+    const rolesMod = line.children[5].innerHTML
 
 
     Id.value = idMod
@@ -63,6 +64,7 @@ on(document, 'click', '.eBtn', e => {
     Surname.value = surnameMod
     ageEdit.value = ageMod
     passEdit.value = passMod
+    rolesEdit.value = rolesMod
     $('#editModal').modal()
 })
 
@@ -78,6 +80,7 @@ editModal.addEventListener('submit', (e) => {
         }
         rolesListEdit[i] = {id: id, role: $('#rolesEdit').val()[i]};
     }
+
     let editUser = {
         id: Id.value,
         username: Name.value,
@@ -101,10 +104,9 @@ editModal.addEventListener('submit', (e) => {
             showTable(editUserInTable)
         })
         .then(() => document.getElementById(Id.value).remove())
-        .then(() => document.getElementById('editModalClose').click())
+        .then(() => document.getElementById('editModal').click())
 
 })
-
 
 
 // модалка Delete
@@ -130,7 +132,6 @@ deleteModal.addEventListener('submit', (e) => {
     fetch('http://localhost:8080/api/admin/' + idDel.value, {
         method: 'DELETE'
     })
-        // .then(() => document.getElementById(idDelete.value).remove())
         .then(() => document.getElementById(idDel.value).remove())
         .then(() => document.getElementById('deleteModalClose').click())
 })
@@ -138,7 +139,7 @@ deleteModal.addEventListener('submit', (e) => {
 
 // панель добавления юзера
 
-newUserForm.addEventListener('submit', (e) => {
+addNewUser.addEventListener('submit', (e) => {
     e.preventDefault()
     let id = 0
     let rolesList = [];

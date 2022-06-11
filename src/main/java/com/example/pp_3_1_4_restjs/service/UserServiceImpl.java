@@ -40,10 +40,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return new org.springframework.security.core.userdetails.User(findByUsername(username).getUsername(), findByUsername(username).getPassword(),
                 mapRolesToAuthorities(findByUsername(username).getRoles()));
-//        return findByUsername(username); // так не работает авторизация
     }
 
-    // из пачки ролей делаем пачку authority   чтоб получить роли в loadUserByUsername
+    // из пачки ролей делаем пачку authority, чтоб получить роли в loadUserByUsername
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream().map(r -> new SimpleGrantedAuthority(r.getRole())).collect(Collectors.toList());
     }

@@ -10,19 +10,4 @@ import java.util.Collection;
 @Service
 public class RoleServiceImpl implements RoleService{
 
-    private final RoleRepository roleRepository;
-
-    public RoleServiceImpl(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
-    }
-
-    public Collection<Role> getRoleList() {
-        return roleRepository.findAll();
-    }
-
-    public Role getRoleById(int id) {
-        return roleRepository.getReferenceById(id);
-    }
-
-
 }

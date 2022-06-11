@@ -40,7 +40,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/porn/{age}(age=${user.age})}">18+</a>
-<!--                    <a class="nav-link" aria-current="page" href="/porn">18+</a>-->
                 </li>
             </ul>
         </div>
@@ -51,7 +50,7 @@
             <h2>Admin panel</h2>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#allUsers">Users table</a>
+                    <a class="nav-link active" data-toggle="tab" href="#allUsers" id="userTable">Users table</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#addNewUser">New User</a>
@@ -113,7 +112,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="roles" class="col-form-label">Roles</label>
-                                        <select class="form-control" name="rolesList" id="roles" size="2" multiple >
+                                        <select class="form-control select" name="rolesList" id="roles" size="2" multiple >
                                             <option value="ROLE_ADMIN">ADMIN</option>
                                             <option value="ROLE_USER">USER</option>
                                         </select>
@@ -131,11 +130,9 @@
 </div>
 
 
-
-
 <!--    Модалка edit-->
 <div class="modal fade editModal" id="editModal" tabindex="-1" role="dialog"
-     aria-labelledby="deleteModalLabel" aria-hidden="true">
+     aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -176,7 +173,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" id="editModalClose">Close</button>
-                    <button type="submit" class="btn btn-primary">Edit</button>
+                    <button type="submit" class="btn btn-primary" id="modalEditButton">Edit</button>
                 </div>
             </form>
         </div>

@@ -26,7 +26,6 @@ public class CustomFilter implements Filter {
             String[] arrayUrl = badRequest.split(Pattern.quote("/"));
             int agePorn = Integer.parseInt(arrayUrl[2]);
             if (agePorn < 18) {
-                System.out.println("Ваш возраст " + agePorn + "идите нафиг, Игорь!");
                 httpServletResponse.sendRedirect("/user");
             } else filterChain.doFilter(httpServletRequest, httpServletResponse);
         } else filterChain.doFilter(httpServletRequest, httpServletResponse);
