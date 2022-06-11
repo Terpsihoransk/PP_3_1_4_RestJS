@@ -20,12 +20,11 @@ import java.util.List;
 public class AdminControllerRest {
 
     private final UserServiceImpl userServiceImpl;
-    private final RoleServiceImpl roleServiceImpl;
+
 
     @Autowired
-    public AdminControllerRest(UserServiceImpl userServiceImpl, RoleServiceImpl roleServiceImpl) {
+    public AdminControllerRest(UserServiceImpl userServiceImpl) {
         this.userServiceImpl = userServiceImpl;
-        this.roleServiceImpl = roleServiceImpl;
     }
 
     @GetMapping("/admin")
@@ -44,16 +43,13 @@ public class AdminControllerRest {
         if (oldPass.equals(user.getPassword())) {
             user.setPassword(oldPass);
             userServiceImpl.updateUser(user);
-        } else {
-            userServiceImpl.addUser(user);
-        }
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        } return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @DeleteMapping("admin/{id}")
     public ResponseEntity<Integer> delete(@PathVariable("id") int id) {
         userServiceImpl.removeUser(id);
-        return new ResponseEntity<>(id, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
     @PostMapping("/admin")
@@ -61,6 +57,4 @@ public class AdminControllerRest {
         userServiceImpl.addUser(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
-
-
 }

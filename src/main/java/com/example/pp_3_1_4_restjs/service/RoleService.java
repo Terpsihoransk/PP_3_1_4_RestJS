@@ -6,7 +6,7 @@ import java.util.Collection;
 
 public interface RoleService {
 
-    Collection<Role> getRoleList();
+    Collection<Role> getRoleList(); // через list, исключив из html, чтобы была расширяемость
     Role getRoleById(int id);
 
 

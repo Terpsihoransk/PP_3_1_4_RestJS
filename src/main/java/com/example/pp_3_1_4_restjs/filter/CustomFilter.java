@@ -1,5 +1,9 @@
 package com.example.pp_3_1_4_restjs.filter;
 
+import com.example.pp_3_1_4_restjs.models.User;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +30,7 @@ public class CustomFilter implements Filter {
                 httpServletResponse.sendRedirect("/user");
             } else filterChain.doFilter(httpServletRequest, httpServletResponse);
         } else filterChain.doFilter(httpServletRequest, httpServletResponse);
+
     }
 }
 

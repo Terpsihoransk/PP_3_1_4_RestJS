@@ -20,6 +20,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+// убрать лишнееееее!
 @Service
 public class UserServiceImpl implements UserDetailsService, UserService {
 
@@ -33,29 +35,21 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    // пробовала "ещё проще", но падает авторизация
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return new org.springframework.security.core.userdetails.User(findByUsername(username).getUsername(), findByUsername(username).getPassword(),
                 mapRolesToAuthorities(findByUsername(username).getRoles()));
+//        return findByUsername(username); // так не работает авторизация
     }
 
-    // из пачки ролей делаем пачку authority
+    // из пачки ролей делаем пачку authority   чтоб получить роли в loadUserByUsername
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream().map(r -> new SimpleGrantedAuthority(r.getRole())).collect(Collectors.toList());
     }
 
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
-    }
-
-    public List <Role> getSetOfRoles (List <String> rolesId) {
-        List<Role> roleSet = new ArrayList<>();
-        for (String id : rolesId) {
-            roleSet.add(roleService.getRoleById(Integer.parseInt(id)));
-        }
-        return roleSet;
     }
 
     public String getCurrentUsername() {
